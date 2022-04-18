@@ -9,68 +9,90 @@ class Home extends Component {
     films: [
       {
         id: "1",
-        title: "Ocean's 8",
+        title: "Oceans 8",
         category: "Comedy",
-        image:
-          "https://github.com/watch-janick/c4t-react-interview/blob/main/images/1.jpg?raw=true",
-        imagealt: "Ocean's 8",
-        nbrlikes: 500,
-        nbrdislike: 2,
-      } as Movie,
+        thumbnail: "1.jpg",
+        likes: 4,
+        dislikes: 1,
+      },
       {
         id: "2",
         title: "Midnight Sun",
         category: "Comedy",
-        image:
-          "https://github.com/watch-janick/c4t-react-interview/blob/main/images/2.jpg?raw=true",
-        imagealt: "Midnight Sun",
-        nbrlikes: 300,
-        nbrdislike: 22,
-      } as Movie,
+        thumbnail: "2.jpg",
+        likes: 2,
+        dislikes: 0,
+      },
       {
         id: "3",
-        title: "les indestructible 2",
-        category: "Comedy",
-        image:
-          "https://github.com/watch-janick/c4t-react-interview/blob/main/images/3.jpg?raw=true",
-        imagealt: "les indestructible 2",
-        nbrlikes: 300,
-        nbrdislike: 22,
-      } as Movie,
+        title: "Les indestructibles 2",
+        category: "Animation",
+        thumbnail: "3.jpg",
+        likes: 3,
+        dislikes: 1,
+      },
       {
         id: "4",
         title: "Sans un bruit",
-        category: "Comedy",
-        image:
-          "https://github.com/watch-janick/c4t-react-interview/blob/main/images/4.jpg?raw=true",
-        imagealt: "Sans un bruit",
-        nbrlikes: 300,
-        nbrdislike: 22,
-      } as Movie,
+        category: "Thriller",
+        thumbnail: "4.jpg",
+        likes: 6,
+        dislikes: 6,
+      },
       {
         id: "5",
         title: "Creed II",
-        category: "Comedy",
-        image:
-          "https://github.com/watch-janick/c4t-react-interview/blob/main/images/5.jpg?raw=true",
-        imagealt: "Creed II",
-        nbrlikes: 300,
-        nbrdislike: 22,
-      } as Movie,
+        category: "Drame",
+        thumbnail: "5.jpg",
+        likes: 16,
+        dislikes: 2,
+      },
+      {
+        id: "6",
+        title: "Gone Girl",
+        category: "Thriller",
+        thumbnail: "6.jpg",
+        likes: 22,
+        dislikes: 12,
+      },
+      {
+        id: "7",
+        title: "Pulp Fiction",
+        category: "Thriller",
+        thumbnail: "7.jpg",
+        likes: 1233,
+        dislikes: 32,
+      },
+      {
+        id: "8",
+        title: "Seven",
+        category: "Thriller",
+        thumbnail: "8.jpg",
+        likes: 2,
+        dislikes: 1,
+      },
+      {
+        id: "9",
+        title: "Inception",
+        category: "Thriller",
+        thumbnail: "9.jpg",
+        likes: 2,
+        dislikes: 1,
+      },
     ],
   };
 
   onLikeClicked = (item: Movie) => {
     const films = [...this.state.films];
     const index = films.indexOf(item);
-    films[index].nbrlikes++;
+    films[index].likes++;
     this.setState({ films });
   };
 
   onDisLikeClicked = (item: Movie) => {
     const films = [...this.state.films];
     const index = films.indexOf(item);
-    films[index].nbrdislike++;
+    films[index].dislikes++;
     this.setState({ films });
   };
 

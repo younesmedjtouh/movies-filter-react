@@ -15,8 +15,8 @@ function FilmItem(props: Props) {
       <div className="card">
         <div className="product-image">
           <img
-            src={props.film.image}
-            alt={props.film.imagealt}
+            src={props.film.thumbnail}
+            alt={props.film.title}
             className="img-fluid"
           />
         </div>
@@ -40,7 +40,7 @@ function FilmItem(props: Props) {
                     onClick={() => props.onLike(props.film)}
                   >
                     <i className="fa-solid fa-thumbs-up"></i>
-                    <p className="counter">{props.film.nbrlikes}</p>
+                    <p className="counter">{props.film.likes}</p>
                   </button>
                 </div>
                 <div className="row mx-1">
@@ -50,7 +50,7 @@ function FilmItem(props: Props) {
                     onClick={() => props.onDisLike(props.film)}
                   >
                     <i className="fa-solid fa-thumbs-down"></i>
-                    <p className="counter">{props.film.nbrdislike}</p>
+                    <p className="counter">{props.film.dislikes}</p>
                   </button>
                 </div>
               </div>
