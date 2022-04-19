@@ -8,13 +8,14 @@ import { connect } from "react-redux";
 import FilmItem from "../../components/film/filmItem";
 import { Movie } from "../../models/movie";
 import { AppDispatch, MoviesState } from "../../models/types";
+import { Spinner, Pagination } from "react-bootstrap";
 
 type AllProps = MoviesState & AppDispatch;
 
 class Home extends Component<AllProps> {
   constructor(props: AllProps) {
     super(props);
-    this.props.loadMovies();
+    this.props.loadMovies("1");
   }
 
   state = {
@@ -38,6 +39,10 @@ class Home extends Component<AllProps> {
   onDeleteClicked = (id: string) => {
     const films = this.props.movies.moviesList.filter((c) => c.id !== id);
     this.setState({ films });
+  };
+
+  changePage = (nbrPage: string | null) => {
+    this.props.loadMovies(nbrPage);
   };
 
   render() {
@@ -66,18 +71,42 @@ class Home extends Component<AllProps> {
             </form>
           </div>
         </div>
-        <div className="d-flex flex-wrap">
-          {this.props.movies.moviesList.map((item) => (
-            <div key={item.id} className="col-lg-4 col-md-4 col-sm-6">
-              <FilmItem
-                film={item}
-                onLike={this.onLikeClicked}
-                onDisLike={this.onDisLikeClicked}
-                onDelete={this.onDeleteClicked}
-              />
+        {this.props.loadingMovies ? (
+          <Spinner
+            animation="border"
+            role="status"
+            variant="primary"
+            className="d-flex justify-content-center"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        ) : (
+          <>
+            <div className="d-flex flex-wrap">
+              {this.props.movies.moviesList.map((item) => (
+                <div key={item.id} className="col-lg-4 col-md-4 col-sm-6">
+                  <FilmItem
+                    film={item}
+                    onLike={this.onLikeClicked}
+                    onDisLike={this.onDisLikeClicked}
+                    onDelete={this.onDeleteClicked}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            <Pagination className="d-flex justify-content-center">
+              {this.props.movies.pager.pages.map((page) => (
+                <Pagination.Item
+                  key={page}
+                  active={page === this.props.movies.pager.currentPage}
+                  onClick={(e) => this.changePage(e.currentTarget.textContent)}
+                >
+                  {page}
+                </Pagination.Item>
+              ))}
+            </Pagination>
+          </>
+        )}
       </div>
     );
   }

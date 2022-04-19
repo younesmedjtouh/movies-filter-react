@@ -7,5 +7,5 @@ export interface MoviesState {
 }
 
 export interface AppDispatch {
-    loadMovies: () => any;
+    loadMovies: (page: string | null) => any;
 }

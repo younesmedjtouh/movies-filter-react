@@ -13,6 +13,6 @@ export const mapStateToProps = (state: MoviesState) => {
 
 export const mapDispatchToProps = (dispatch: any) => {
     return {
-        loadMovies: () => dispatch(loadMovies())
+        loadMovies: (page: string | null) => dispatch(loadMovies(page))
     };
 };
