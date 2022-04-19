@@ -13,7 +13,7 @@ export const mapStateToProps = (state: MoviesState) => {
 
 export const mapDispatchToProps = (dispatch: any) => {
     return {
-        loadMovies: (page: string | null) => dispatch(loadMovies(page)),
-        deleteMovie: (id: string) => dispatch(deleteMovie(id))
+        loadMovies: (page: string | null, searchTerm: string) => dispatch(loadMovies(page, searchTerm)),
+        deleteMovie: (id: string, searchTerm: string) => dispatch(deleteMovie(id, searchTerm))
     };
 };

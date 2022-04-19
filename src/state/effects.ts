@@ -6,10 +6,14 @@ import {
     deleteMovieSuccess
 } from "./actions";
 
-export const loadMovies = (page: string | null) => {
+export const loadMovies = (page: string | null, searchTerm: string) => {
+    let baseUrl = "http://localhost:4000/api/movies?page=" + page;
+    if (searchTerm != null) {
+        baseUrl = baseUrl + "&searchTerm=" + searchTerm;
+    }
     return (dispatch: any) => {
         dispatch(loadMoviesPending());
-        fetch("http://localhost:4000/api/movies?page=" + page)
+        fetch(baseUrl)
             .then((res) => res.json())
             .then((res) => {
                 dispatch(loadMoviesSuccess(res));
@@ -20,9 +24,13 @@ export const loadMovies = (page: string | null) => {
     };
 };
 
-export const deleteMovie = (id: string) => {
+export const deleteMovie = (id: string, searchTerm: string) => {
+    let baseUrl = "http://localhost:4000/api/movies/" + id;
+    if (searchTerm != null) {
+        baseUrl = baseUrl + "?searchTerm=" + searchTerm;
+    }
     return (dispatch: any) => {
-        fetch("http://localhost:4000/api/movies/" + id, {
+        fetch(baseUrl, {
             method: "DELETE",
             headers: {
                 Accept: "application/json",

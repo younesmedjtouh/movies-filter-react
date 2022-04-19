@@ -15,7 +15,7 @@ type AllProps = MoviesState & AppDispatch;
 class Home extends Component<AllProps> {
   constructor(props: AllProps) {
     super(props);
-    this.props.loadMovies("1");
+    this.props.loadMovies("1", this.state.searchTerm);
   }
 
   state = {
@@ -37,11 +37,16 @@ class Home extends Component<AllProps> {
   };
 
   onDeleteClicked = (id: string) => {
-    this.props.deleteMovie(id);
+    this.props.deleteMovie(id, this.state.searchTerm);
   };
 
   changePage = (nbrPage: string | null) => {
-    this.props.loadMovies(nbrPage);
+    this.props.loadMovies(nbrPage, this.state.searchTerm);
+  };
+
+  search = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    this.props.loadMovies("1", this.state.searchTerm);
   };
 
   render() {
@@ -50,7 +55,7 @@ class Home extends Component<AllProps> {
       <div className="container">
         <div className="card my-2 mx-2">
           <div className="card-body">
-            <form>
+            <form onSubmit={this.search}>
               <div className="row g-2">
                 <input
                   type="text"
@@ -61,12 +66,12 @@ class Home extends Component<AllProps> {
                     this.setState({ searchTerm: e.target.value })
                   }
                 />
+                <input
+                  className="btn btn-primary mt-2"
+                  type="submit"
+                  value="Search"
+                />
               </div>
-              <input
-                className="btn w-100 btn-primary"
-                type="submit"
-                value="Search"
-              />
             </form>
           </div>
         </div>
