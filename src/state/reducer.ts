@@ -4,6 +4,8 @@ import {
     LoadMoviesPending,
     LoadMoviesSuccess,
     LoadMoviesError,
+    DeleteMovieError,
+    DeleteMovieSuccess
 } from "./actions";
 import { Pager } from "../models/movie";
 
@@ -30,6 +32,16 @@ const rootReducer: Reducer<MoviesState> = (state = initialState, action) => {
             return {
                 ...state,
                 loadingMovies: false,
+                error: action.payload,
+            };
+        case DeleteMovieSuccess:
+            return {
+                ...state,
+                movies: action.payload
+            };
+        case DeleteMovieError:
+            return {
+                ...state,
                 error: action.payload,
             };
         default:

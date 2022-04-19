@@ -37,8 +37,7 @@ class Home extends Component<AllProps> {
   };
 
   onDeleteClicked = (id: string) => {
-    const films = this.props.movies.moviesList.filter((c) => c.id !== id);
-    this.setState({ films });
+    this.props.deleteMovie(id);
   };
 
   changePage = (nbrPage: string | null) => {

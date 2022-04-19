@@ -1,6 +1,6 @@
 import { MoviesState } from "../models/types";
 import {
-    loadMovies
+    loadMovies, deleteMovie
 } from "./effects";
 
 export const mapStateToProps = (state: MoviesState) => {
@@ -13,6 +13,7 @@ export const mapStateToProps = (state: MoviesState) => {
 
 export const mapDispatchToProps = (dispatch: any) => {
     return {
-        loadMovies: (page: string | null) => dispatch(loadMovies(page))
+        loadMovies: (page: string | null) => dispatch(loadMovies(page)),
+        deleteMovie: (id: string) => dispatch(deleteMovie(id))
     };
 };

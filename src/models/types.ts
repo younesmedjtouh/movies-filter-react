@@ -8,4 +8,5 @@ export interface MoviesState {
 
 export interface AppDispatch {
     loadMovies: (page: string | null) => any;
+    deleteMovie: (id: string) => any;
 }

@@ -3,6 +3,8 @@ import { MoviesList } from "../models/movie";
 export const LoadMoviesPending = "LoadMoviesPending";
 export const LoadMoviesSuccess = "LoadMoviesSuccess";
 export const LoadMoviesError = "LoadMoviesError";
+export const DeleteMovieSuccess = "DeleteMovieSuccess";
+export const DeleteMovieError = "DeleteMovieError";
 
 export const loadMoviesPending = () => {
     return { type: LoadMoviesPending };
@@ -14,4 +16,12 @@ export const loadMoviesSuccess = (moviesList: MoviesList) => {
 
 export const loadMoviesError = (error: any) => {
     return { type: LoadMoviesError, payload: error };
+};
+
+export const deleteMovieSuccess = (id: string) => {
+    return { type: DeleteMovieSuccess, payload: id };
+};
+
+export const deleteMovieError = (error: any) => {
+    return { type: DeleteMovieError, payload: error };
 };
