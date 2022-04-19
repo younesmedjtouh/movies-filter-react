@@ -15,7 +15,7 @@ function FilmItem(props: Props) {
       <div className="card">
         <div className="product-image">
           <img
-            src={props.film.thumbnail}
+            src={"http://localhost:4000/images/" + props.film.thumbnail}
             alt={props.film.title}
             className="img-fluid"
           />
