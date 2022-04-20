@@ -5,7 +5,8 @@ import {
     LoadMoviesSuccess,
     LoadMoviesError,
     DeleteMovieError,
-    DeleteMovieSuccess
+    DeleteMovieSuccess,
+    HandleLike
 } from "./actions";
 import { Pager } from "../models/movie";
 
@@ -43,6 +44,14 @@ const rootReducer: Reducer<MoviesState> = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
+            };
+        case HandleLike:
+            return {
+                ...state,
+                movies: {
+                    ...state.movies,
+                    moviesList: state.movies.moviesList.map((movie) => movie.id === action.payload.id ? action.payload : movie)
+                }
             };
         default:
             return state;

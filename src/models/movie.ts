@@ -5,6 +5,8 @@ export interface Movie {
     thumbnail: string;
     likes: number;
     dislikes: number;
+    likeActive: boolean,
+    dislikeActive: boolean
 }
 
 export interface Pager {

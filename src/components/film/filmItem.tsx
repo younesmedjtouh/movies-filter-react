@@ -36,6 +36,7 @@ function FilmItem(props: Props) {
                 <div className="row mx-1">
                   <button
                     className="btn btn-primary"
+                    disabled={props.film.likeActive}
                     type="button"
                     onClick={() => props.onLike(props.film)}
                   >
@@ -47,6 +48,7 @@ function FilmItem(props: Props) {
                   <button
                     className="btn btn-primary"
                     type="button"
+                    disabled={props.film.dislikeActive}
                     onClick={() => props.onDisLike(props.film)}
                   >
                     <i className="fa-solid fa-thumbs-down"></i>

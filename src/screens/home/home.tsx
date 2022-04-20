@@ -22,18 +22,24 @@ class Home extends Component<AllProps> {
     searchTerm: "",
   };
 
-  onLikeClicked = (item: Movie) => {
-    const films = [...this.props.movies.moviesList];
-    const index = films.indexOf(item);
-    films[index].likes++;
-    this.setState({ films });
+  onLikeClicked = (movie: Movie) => {
+    if (movie.dislikeActive) {
+      movie.dislikes--;
+      movie.dislikeActive = !movie.dislikeActive;
+    }
+    movie.likeActive = !movie.likeActive;
+    movie.likes++;
+    this.props.handleLike(movie);
   };
 
-  onDisLikeClicked = (item: Movie) => {
-    const films = [...this.props.movies.moviesList];
-    const index = films.indexOf(item);
-    films[index].dislikes++;
-    this.setState({ films });
+  onDisLikeClicked = (movie: Movie) => {
+    if (movie.likeActive) {
+      movie.likes--;
+      movie.likeActive = !movie.likeActive;
+    }
+    movie.dislikeActive = !movie.dislikeActive;
+    movie.dislikes++;
+    this.props.handleLike(movie);
   };
 
   onDeleteClicked = (id: string) => {

@@ -1,4 +1,4 @@
-import { MoviesList } from "./movie";
+import { Movie, MoviesList } from "./movie";
 
 export interface MoviesState {
     movies: MoviesList,
@@ -9,4 +9,5 @@ export interface MoviesState {
 export interface AppDispatch {
     loadMovies: (page: string | null, searchTerm: string) => any;
     deleteMovie: (id: string, searchTerm: string) => any;
+    handleLike: (movie: Movie) => any;
 }
