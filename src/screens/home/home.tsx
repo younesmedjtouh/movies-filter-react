@@ -15,13 +15,13 @@ type AllProps = MoviesState & AppDispatch;
 class Home extends Component<AllProps> {
   constructor(props: AllProps) {
     super(props);
-    this.props.loadMovies("1", this.state.searchTerm);
+    this.props.loadMovies("1", this.state.searchTerm, this.state.category);
     this.props.loadCategories();
   }
 
   state = {
     searchTerm: "",
-    categoriesItem: [] as string[],
+    category: [] as string[],
   };
 
   onLikeClicked = (movie: Movie) => {
@@ -45,20 +45,20 @@ class Home extends Component<AllProps> {
   };
 
   onDeleteClicked = (id: string) => {
-    this.props.deleteMovie(id, this.state.searchTerm);
+    this.props.deleteMovie(id, this.state.searchTerm, this.state.category);
   };
 
   changePage = (nbrPage: string | null) => {
-    this.props.loadMovies(nbrPage, this.state.searchTerm);
+    this.props.loadMovies(nbrPage, this.state.searchTerm, this.state.category);
   };
 
   search = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.props.loadMovies("1", this.state.searchTerm);
+    this.props.loadMovies("1", this.state.searchTerm, this.state.category);
   };
 
   handleChange = (e: any) => {
-    let sel = this.state.categoriesItem;
+    let sel = this.state.category;
     let find = sel.indexOf(e.target.value);
     if (find > -1) {
       sel.splice(find, 1);
@@ -69,7 +69,7 @@ class Home extends Component<AllProps> {
     this.setState({
       selections: sel,
     });
-    console.log(this.state.categoriesItem);
+    console.log(this.state.category);
   };
 
   render() {

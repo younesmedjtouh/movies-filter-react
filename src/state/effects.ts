@@ -8,10 +8,13 @@ import {
     loadCategoriesSuccess
 } from "./actions";
 
-export const loadMovies = (page: string | null, searchTerm: string) => {
+export const loadMovies = (page: string | null, searchTerm: string, category: string[]) => {
     let baseUrl = "http://localhost:4000/api/movies?page=" + page;
     if (searchTerm != null) {
         baseUrl = baseUrl + "&searchTerm=" + searchTerm;
+    }
+    if (category.length !== 0) {
+        category.forEach((cat) => baseUrl = baseUrl + "&categories=" + cat);
     }
     return (dispatch: any) => {
         dispatch(loadMoviesPending());
@@ -26,10 +29,13 @@ export const loadMovies = (page: string | null, searchTerm: string) => {
     };
 };
 
-export const deleteMovie = (id: string, searchTerm: string) => {
+export const deleteMovie = (id: string, searchTerm: string, category: string[]) => {
     let baseUrl = "http://localhost:4000/api/movies/" + id;
     if (searchTerm != null) {
         baseUrl = baseUrl + "?searchTerm=" + searchTerm;
+    }
+    if (category.length !== 0) {
+        category.forEach((cat) => baseUrl = baseUrl + "&categories=" + cat);
     }
     return (dispatch: any) => {
         fetch(baseUrl, {
