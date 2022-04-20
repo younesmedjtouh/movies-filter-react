@@ -92,7 +92,7 @@ class Home extends Component<AllProps> {
                 <div className="row">
                   {this.props.categories.map((cat, index) => {
                     return (
-                      <div className="col-md-3">
+                      <div className="col-md-3" key={index}>
                         <div className="form-check m-3">
                           <input
                             className="form-check-input"
