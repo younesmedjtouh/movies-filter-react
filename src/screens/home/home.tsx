@@ -16,10 +16,12 @@ class Home extends Component<AllProps> {
   constructor(props: AllProps) {
     super(props);
     this.props.loadMovies("1", this.state.searchTerm);
+    this.props.loadCategories();
   }
 
   state = {
     searchTerm: "",
+    categoriesItem: [] as string[],
   };
 
   onLikeClicked = (movie: Movie) => {
@@ -55,6 +57,21 @@ class Home extends Component<AllProps> {
     this.props.loadMovies("1", this.state.searchTerm);
   };
 
+  handleChange = (e: any) => {
+    let sel = this.state.categoriesItem;
+    let find = sel.indexOf(e.target.value);
+    if (find > -1) {
+      sel.splice(find, 1);
+    } else {
+      sel.push(e.target.value);
+    }
+
+    this.setState({
+      selections: sel,
+    });
+    console.log(this.state.categoriesItem);
+  };
+
   render() {
     //if (!this.props.loadingMovies) return <div>loading</div>;
     return (
@@ -72,6 +89,30 @@ class Home extends Component<AllProps> {
                     this.setState({ searchTerm: e.target.value })
                   }
                 />
+                <div className="row">
+                  {this.props.categories.map((cat, index) => {
+                    return (
+                      <div className="col-md-3">
+                        <div className="form-check m-3">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name="categories"
+                            value={cat}
+                            id="flexCheckDefault"
+                            onChange={this.handleChange}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="flexCheckDefault"
+                          >
+                            {cat}
+                          </label>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
                 <input
                   className="btn btn-primary mt-2"
                   type="submit"

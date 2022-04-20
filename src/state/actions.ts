@@ -6,6 +6,8 @@ export const LoadMoviesError = "LoadMoviesError";
 export const DeleteMovieSuccess = "DeleteMovieSuccess";
 export const DeleteMovieError = "DeleteMovieError";
 export const HandleLike = "HandleLike";
+export const LoadCategoriesSuccess = "LoadCategoriesSuccess";
+export const LoadCategoriesError = "LoadCategoriesError";
 
 
 export const loadMoviesPending = () => {
@@ -30,4 +32,12 @@ export const deleteMovieError = (error: any) => {
 
 export const handleLike = (movie: Movie) => {
     return { type: HandleLike, payload: movie };
+};
+
+export const loadCategoriesSuccess = (categories: string[]) => {
+    return { type: LoadCategoriesSuccess, payload: categories };
+};
+
+export const loadCategoriesError = (error: any) => {
+    return { type: LoadCategoriesError, payload: error };
 };
