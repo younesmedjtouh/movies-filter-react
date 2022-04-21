@@ -145,17 +145,65 @@ class Home extends Component<AllProps> {
                 </div>
               ))}
             </div>
-            <Pagination className="d-flex justify-content-center">
-              {this.props.movies.pager.pages.map((page) => (
-                <Pagination.Item
-                  key={page}
-                  active={page === this.props.movies.pager.currentPage}
-                  onClick={(e) => this.changePage(e.currentTarget.textContent)}
-                >
-                  {page}
-                </Pagination.Item>
-              ))}
-            </Pagination>
+            {this.props.movies.moviesList.length > 0 ? (
+              <Pagination className="d-flex justify-content-center">
+                <Pagination.First
+                  disabled={
+                    this.props.movies.pager.currentPage === 1 ? true : false
+                  }
+                  onClick={(e) =>
+                    this.changePage(
+                      this.props.movies.pager.startPage.toString()
+                    )
+                  }
+                />
+                <Pagination.Prev
+                  disabled={
+                    this.props.movies.pager.currentPage === 1 ? true : false
+                  }
+                  onClick={(e) =>
+                    this.changePage(
+                      (this.props.movies.pager.currentPage - 1).toString()
+                    )
+                  }
+                />
+                {this.props.movies.pager.pages.map((page) => (
+                  <Pagination.Item
+                    key={page}
+                    active={page === this.props.movies.pager.currentPage}
+                    onClick={(e) =>
+                      this.changePage(e.currentTarget.textContent)
+                    }
+                  >
+                    {page}
+                  </Pagination.Item>
+                ))}
+                <Pagination.Next
+                  disabled={
+                    this.props.movies.pager.currentPage ===
+                    this.props.movies.pager.pages.length
+                      ? true
+                      : false
+                  }
+                  onClick={(e) =>
+                    this.changePage(
+                      (this.props.movies.pager.currentPage + 1).toString()
+                    )
+                  }
+                />
+                <Pagination.Last
+                  disabled={
+                    this.props.movies.pager.currentPage ===
+                    this.props.movies.pager.pages.length
+                      ? true
+                      : false
+                  }
+                  onClick={(e) =>
+                    this.changePage(this.props.movies.pager.endPage.toString())
+                  }
+                />
+              </Pagination>
+            ) : null}
           </>
         )}
       </div>
