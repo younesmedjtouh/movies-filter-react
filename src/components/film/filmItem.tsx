@@ -11,7 +11,7 @@ type Props = {
 
 function FilmItem(props: Props) {
   return (
-    <div className="container pb-1">
+    <div className="pb-1">
       <div className="card">
         <div className="product-image">
           <img

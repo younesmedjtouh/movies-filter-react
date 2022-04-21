@@ -76,7 +76,7 @@ class Home extends Component<AllProps> {
     //if (!this.props.loadingMovies) return <div>loading</div>;
     return (
       <div className="container">
-        <div className="card my-2 mx-2">
+        <div className="card my-2">
           <div className="card-body">
             <form onSubmit={this.search}>
               <div className="row g-2">
@@ -133,7 +133,7 @@ class Home extends Component<AllProps> {
           </Spinner>
         ) : (
           <>
-            <div className="d-flex flex-wrap">
+            <div className="row">
               {this.props.movies.moviesList.map((item) => (
                 <div key={item.id} className="col-lg-4 col-md-4 col-sm-6">
                   <FilmItem
