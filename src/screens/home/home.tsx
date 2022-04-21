@@ -6,9 +6,10 @@ import {
 } from "../../state/rootStoreFacade";
 import { connect } from "react-redux";
 import FilmItem from "../../components/film/filmItem";
+import PaginationComponent from "../../components/pagination";
 import { Movie } from "../../models/movie";
 import { AppDispatch, MoviesState } from "../../models/types";
-import { Spinner, Pagination } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 type AllProps = MoviesState & AppDispatch;
 
@@ -73,7 +74,6 @@ class Home extends Component<AllProps> {
   };
 
   render() {
-    //if (!this.props.loadingMovies) return <div>loading</div>;
     return (
       <div className="container">
         <div className="card my-2">
@@ -146,63 +146,10 @@ class Home extends Component<AllProps> {
               ))}
             </div>
             {this.props.movies.moviesList.length > 0 ? (
-              <Pagination className="d-flex justify-content-center">
-                <Pagination.First
-                  disabled={
-                    this.props.movies.pager.currentPage === 1 ? true : false
-                  }
-                  onClick={(e) =>
-                    this.changePage(
-                      this.props.movies.pager.startPage.toString()
-                    )
-                  }
-                />
-                <Pagination.Prev
-                  disabled={
-                    this.props.movies.pager.currentPage === 1 ? true : false
-                  }
-                  onClick={(e) =>
-                    this.changePage(
-                      (this.props.movies.pager.currentPage - 1).toString()
-                    )
-                  }
-                />
-                {this.props.movies.pager.pages.map((page) => (
-                  <Pagination.Item
-                    key={page}
-                    active={page === this.props.movies.pager.currentPage}
-                    onClick={(e) =>
-                      this.changePage(e.currentTarget.textContent)
-                    }
-                  >
-                    {page}
-                  </Pagination.Item>
-                ))}
-                <Pagination.Next
-                  disabled={
-                    this.props.movies.pager.currentPage ===
-                    this.props.movies.pager.pages.length
-                      ? true
-                      : false
-                  }
-                  onClick={(e) =>
-                    this.changePage(
-                      (this.props.movies.pager.currentPage + 1).toString()
-                    )
-                  }
-                />
-                <Pagination.Last
-                  disabled={
-                    this.props.movies.pager.currentPage ===
-                    this.props.movies.pager.pages.length
-                      ? true
-                      : false
-                  }
-                  onClick={(e) =>
-                    this.changePage(this.props.movies.pager.endPage.toString())
-                  }
-                />
-              </Pagination>
+              <PaginationComponent
+                pager={this.props.movies.pager}
+                changePage={this.changePage}
+              />
             ) : null}
           </>
         )}
