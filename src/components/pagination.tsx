@@ -9,7 +9,7 @@ type Props = {
 
 function PaginationComponent(props: Props) {
   return (
-    <Pagination className="d-flex justify-content-center">
+    <Pagination size="lg" className="d-flex justify-content-center pt-2">
       <Pagination.First
         disabled={props.pager.currentPage === 1 ? true : false}
         onClick={(e) => props.changePage(props.pager.startPage.toString())}
