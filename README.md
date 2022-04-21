@@ -1,5 +1,3 @@
-#test-interview-medjtouh-younes
-
 Lister les films dans des cartes côte à côte (responsive) et afficher :
 
 l'image de l'affiche
