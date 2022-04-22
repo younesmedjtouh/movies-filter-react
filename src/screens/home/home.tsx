@@ -20,7 +20,7 @@ function Home(props: AllProps) {
   useEffect(() => {
     props.loadCategories();
     props.loadMovies(page, searchTerm, category);
-  }, [page]);
+  }, [page, category]);
 
   const onLikeClicked = (movie: Movie) => {
     if (movie.dislikeActive) {
@@ -43,7 +43,10 @@ function Home(props: AllProps) {
   };
 
   const onDeleteClicked = (id: string) => {
-    props.deleteMovie(id, searchTerm, category);
+    props.deleteMovie(id);
+    setTimeout(() => {
+      props.loadMovies(page, searchTerm, category);
+    }, 200);
   };
 
   const search = (event: React.FormEvent<HTMLFormElement>) => {
@@ -61,6 +64,7 @@ function Home(props: AllProps) {
     }
 
     setCategory(sel);
+    props.loadMovies("1", searchTerm, category);
   };
 
   return (

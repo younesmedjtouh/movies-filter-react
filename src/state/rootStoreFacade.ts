@@ -16,7 +16,7 @@ export const mapStateToProps = (state: MoviesState) => {
 export const mapDispatchToProps = (dispatch: any) => {
     return {
         loadMovies: (page: string | null, searchTerm: string, category: string[]) => dispatch(loadMovies(page, searchTerm, category)),
-        deleteMovie: (id: string, searchTerm: string, category: string[]) => dispatch(deleteMovie(id, searchTerm, category)),
+        deleteMovie: (id: string) => dispatch(deleteMovie(id)),
         loadCategories: () => dispatch(loadCategories()),
         updateMovie: (movie: Movie) => dispatch(updateMovie(movie)),
     };

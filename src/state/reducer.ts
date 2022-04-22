@@ -41,7 +41,10 @@ const rootReducer: Reducer<MoviesState> = (state = initialState, action) => {
         case DeleteMovieSuccess:
             return {
                 ...state,
-                movies: action.payload
+                movies: {
+                    ...state.movies,
+                    moviesList: state.movies.moviesList.filter((movie) => movie.id !== action.id)
+                }
             };
         case DeleteMovieError:
             return {

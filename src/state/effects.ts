@@ -37,19 +37,14 @@ export const loadMovies = (page: string | null, searchTerm: string, category: st
     };
 };
 
-export const deleteMovie = (id: string, searchTerm: string, category: string[]) => {
-    var params = new URLSearchParams();
-    if (searchTerm !== '') {
-        params.append("searchTerm", searchTerm);
-    };
-    if (category.length !== 0) {
-        category.forEach((cat) => params.append("categories", cat));
-    }
+export const deleteMovie = (id: string) => {
     return (dispatch: any) => {
         try {
-            axios.delete(baseUrl + "movies/" + id, { params })
+            axios.delete(baseUrl + "movies/" + id)
                 .then(res => {
-                    dispatch(deleteMovieSuccess(res.data));
+                    if (res.status === 200) {
+                        dispatch(deleteMovieSuccess(id));
+                    }
                 })
         } catch (err) {
             dispatch(deleteMovieError(err));
