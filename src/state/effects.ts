@@ -7,64 +7,64 @@ import {
     loadCategoriesError,
     loadCategoriesSuccess
 } from "./actions";
+import axios from 'axios';
+
+let baseUrl = "http://localhost:4000/api/";
 
 export const loadMovies = (page: string | null, searchTerm: string, category: string[]) => {
-    let baseUrl = "http://localhost:4000/api/movies?page=" + page;
-    if (searchTerm != null) {
-        baseUrl = baseUrl + "&searchTerm=" + searchTerm;
-    }
+    var params = new URLSearchParams();
+    params.append("page", page || '');
+
+    if (searchTerm !== '') {
+        params.append("searchTerm", searchTerm);
+    };
     if (category.length !== 0) {
-        category.forEach((cat) => baseUrl = baseUrl + "&categories=" + cat);
-    }
+        category.forEach((cat) => params.append("categories", cat));
+    };
+
     return (dispatch: any) => {
         dispatch(loadMoviesPending());
-        fetch(baseUrl)
-            .then((res) => res.json())
-            .then((res) => {
-                dispatch(loadMoviesSuccess(res));
-            })
-            .catch((err) => {
-                dispatch(loadMoviesError(err));
-            });
+        try {
+            axios.get(baseUrl + "movies", { params })
+                .then(res => {
+                    dispatch(loadMoviesSuccess(res.data));
+                })
+        } catch (err) {
+            dispatch(loadMoviesError(err));
+        }
     };
 };
 
 export const deleteMovie = (id: string, searchTerm: string, category: string[]) => {
-    let baseUrl = "http://localhost:4000/api/movies/" + id;
-    if (searchTerm != null) {
-        baseUrl = baseUrl + "?searchTerm=" + searchTerm;
-    }
+    var params = new URLSearchParams();
+    params.append("id", id);
+    if (searchTerm !== '') {
+        params.append("searchTerm", searchTerm);
+    };
     if (category.length !== 0) {
-        category.forEach((cat) => baseUrl = baseUrl + "&categories=" + cat);
+        category.forEach((cat) => params.append("categories", cat));
     }
     return (dispatch: any) => {
-        fetch(baseUrl, {
-            method: "DELETE",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                dispatch(deleteMovieSuccess(res));
-            })
-            .catch((err) => {
-                alert("error: " + JSON.stringify(err));
-                dispatch(deleteMovieError(err));
-            });
+        try {
+            axios.delete(baseUrl + "movies", { params })
+                .then(res => {
+                    dispatch(deleteMovieSuccess(res.data));
+                })
+        } catch (err) {
+            dispatch(deleteMovieError(err));
+        }
     };
 };
 
 export const loadCategories = () => {
     return (dispatch: any) => {
-        fetch("http://localhost:4000/api/categories")
-            .then((res) => res.json())
-            .then((res) => {
-                dispatch(loadCategoriesSuccess(res));
-            })
-            .catch((err) => {
-                dispatch(loadCategoriesError(err));
-            });
+        try {
+            axios.get(baseUrl + 'categories')
+                .then(res => {
+                    dispatch(loadCategoriesSuccess(res.data));
+                })
+        } catch (err) {
+            dispatch(loadCategoriesError(err));
+        }
     };
 };

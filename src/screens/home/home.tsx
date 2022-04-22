@@ -70,7 +70,6 @@ class Home extends Component<AllProps> {
     this.setState({
       selections: sel,
     });
-    console.log(this.state.category);
   };
 
   render() {
