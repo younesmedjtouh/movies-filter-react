@@ -15,11 +15,12 @@ type AllProps = MoviesState & AppDispatch;
 function Home(props: AllProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState([] as string[]);
+  const [page, setPage] = useState("1" as string | null);
 
   useEffect(() => {
     props.loadCategories();
-    props.loadMovies("1", searchTerm, category);
-  }, []);
+    props.loadMovies(page, searchTerm, category);
+  }, [page]);
 
   const onLikeClicked = (movie: Movie) => {
     if (movie.dislikeActive) {
@@ -43,10 +44,6 @@ function Home(props: AllProps) {
 
   const onDeleteClicked = (id: string) => {
     props.deleteMovie(id, searchTerm, category);
-  };
-
-  const changePage = (nbrPage: string | null) => {
-    props.loadMovies(nbrPage, searchTerm, category);
   };
 
   const search = (event: React.FormEvent<HTMLFormElement>) => {
@@ -141,7 +138,7 @@ function Home(props: AllProps) {
           {props.movies.moviesList.length > 0 ? (
             <PaginationComponent
               pager={props.movies.pager}
-              changePage={(e) => changePage(e)}
+              changePage={(e) => setPage(e)}
             />
           ) : null}
         </>
