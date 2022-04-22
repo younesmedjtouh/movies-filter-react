@@ -39,7 +39,6 @@ export const loadMovies = (page: string | null, searchTerm: string, category: st
 
 export const deleteMovie = (id: string, searchTerm: string, category: string[]) => {
     var params = new URLSearchParams();
-    params.append("id", id);
     if (searchTerm !== '') {
         params.append("searchTerm", searchTerm);
     };
@@ -48,7 +47,7 @@ export const deleteMovie = (id: string, searchTerm: string, category: string[]) 
     }
     return (dispatch: any) => {
         try {
-            axios.delete(baseUrl + "movies", { params })
+            axios.delete(baseUrl + "movies/" + id, { params })
                 .then(res => {
                     dispatch(deleteMovieSuccess(res.data));
                 })
@@ -74,7 +73,7 @@ export const loadCategories = () => {
 export const updateMovie = (movie: Movie) => {
     return (dispatch: any) => {
         try {
-            axios.put(baseUrl + "movies", { movie })
+            axios.put(baseUrl + "movies/" + movie.id, { movie })
                 .then(res => {
                     if (res.status === 200) {
                         dispatch(handleLike(movie));
