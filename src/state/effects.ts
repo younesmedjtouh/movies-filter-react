@@ -5,9 +5,11 @@ import {
     deleteMovieError,
     deleteMovieSuccess,
     loadCategoriesError,
-    loadCategoriesSuccess
+    loadCategoriesSuccess,
+    handleLike
 } from "./actions";
 import axios from 'axios';
+import { Movie } from "../models/movie";
 
 let baseUrl = "http://localhost:4000/api/";
 
@@ -65,6 +67,21 @@ export const loadCategories = () => {
                 })
         } catch (err) {
             dispatch(loadCategoriesError(err));
+        }
+    };
+};
+
+export const updateMovie = (movie: Movie) => {
+    return (dispatch: any) => {
+        try {
+            axios.put(baseUrl + "movies", { movie })
+                .then(res => {
+                    if (res.status === 200) {
+                        dispatch(handleLike(movie));
+                    }
+                })
+        } catch (err) {
+
         }
     };
 };

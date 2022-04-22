@@ -1,10 +1,7 @@
 import { MoviesState } from "../models/types";
 import {
-    loadMovies, deleteMovie, loadCategories
+    loadMovies, deleteMovie, loadCategories, updateMovie
 } from "./effects";
-import {
-    handleLike
-} from "./actions"
 import { Movie } from "../models/movie";
 
 export const mapStateToProps = (state: MoviesState) => {
@@ -20,7 +17,7 @@ export const mapDispatchToProps = (dispatch: any) => {
     return {
         loadMovies: (page: string | null, searchTerm: string, category: string[]) => dispatch(loadMovies(page, searchTerm, category)),
         deleteMovie: (id: string, searchTerm: string, category: string[]) => dispatch(deleteMovie(id, searchTerm, category)),
-        handleLike: (movie: Movie) => dispatch(handleLike(movie)),
         loadCategories: () => dispatch(loadCategories()),
+        updateMovie: (movie: Movie) => dispatch(updateMovie(movie)),
     };
 };

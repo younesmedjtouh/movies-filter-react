@@ -10,6 +10,6 @@ export interface MoviesState {
 export interface AppDispatch {
     loadMovies: (page: string | null, searchTerm: string, category: string[]) => any;
     deleteMovie: (id: string, searchTerm: string, category: string[]) => any;
-    handleLike: (movie: Movie) => any;
+    updateMovie: (movie: Movie) => any;
     loadCategories: () => any;
 }
